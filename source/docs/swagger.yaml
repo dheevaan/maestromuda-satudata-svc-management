@@ -1,0 +1,897 @@
+definitions:
+  model.DataSet:
+    properties:
+      _id:
+        type: string
+      author:
+        type: string
+      category:
+        type: string
+      column:
+        items:
+          additionalProperties: true
+          type: object
+        type: array
+      createdAt:
+        type: integer
+      data_description:
+        type: string
+      data_name:
+        type: string
+      data_source:
+        type: string
+      data_table:
+        type: boolean
+      is_required_id:
+        type: boolean
+      is_required_province_code:
+        type: boolean
+      is_required_province_name:
+        type: boolean
+      updatedAt:
+        type: integer
+      upload_file:
+        type: boolean
+      value_row:
+        additionalProperties: true
+        type: object
+    type: object
+  model.DataSet_Search:
+    properties:
+      filter:
+        items:
+          additionalProperties: true
+          type: object
+        type: array
+      order:
+        example: DESC
+        type: string
+      orderBy:
+        example: createdAt
+        type: string
+      page:
+        example: 1
+        type: integer
+      range:
+        $ref: '#/definitions/model.Range'
+      search:
+        description: '? Regex'
+        type: string
+      searchBy:
+        items:
+          type: string
+        type: array
+      size:
+        example: 11
+        type: integer
+    type: object
+  model.DataSet_View:
+    properties:
+      _id:
+        type: string
+      author:
+        type: string
+      category:
+        type: string
+      column:
+        items:
+          additionalProperties: true
+          type: object
+        type: array
+      createdAt:
+        type: integer
+      data_description:
+        type: string
+      data_name:
+        type: string
+      data_source:
+        type: string
+      data_table:
+        type: boolean
+      is_required_id:
+        type: boolean
+      is_required_province_code:
+        type: boolean
+      is_required_province_name:
+        type: boolean
+      updatedAt:
+        type: integer
+      upload_file:
+        type: boolean
+      value_row:
+        additionalProperties: true
+        type: object
+    type: object
+  model.MetadataResponse:
+    properties:
+      message:
+        type: string
+      pagination:
+        $ref: '#/definitions/model.PaginationResponse'
+      status:
+        type: boolean
+      timeExecution:
+        type: string
+    type: object
+  model.PaginationResponse:
+    properties:
+      size:
+        type: integer
+      totalElements:
+        type: integer
+      totalPages:
+        type: integer
+    type: object
+  model.Range:
+    properties:
+      end:
+        example: 1646792565000
+        type: integer
+      field:
+        example: updatedAt
+        type: string
+      start:
+        example: 1646792565000
+        type: integer
+    type: object
+  model.Role:
+    properties:
+      _id:
+        type: string
+      createdAt:
+        type: integer
+      description:
+        type: string
+      name:
+        type: string
+      privileges:
+        items:
+          additionalProperties: true
+          type: object
+        type: array
+      updatedAt:
+        type: integer
+    type: object
+  model.Role_Search:
+    properties:
+      filter:
+        items:
+          additionalProperties: true
+          type: object
+        type: array
+      order:
+        example: DESC
+        type: string
+      orderBy:
+        example: createdAt
+        type: string
+      page:
+        example: 1
+        type: integer
+      range:
+        $ref: '#/definitions/model.Range'
+      search:
+        description: '? Regex'
+        type: string
+      searchBy:
+        items:
+          type: string
+        type: array
+      size:
+        example: 11
+        type: integer
+    type: object
+  model.Role_View:
+    properties:
+      _id:
+        type: string
+      createdAt:
+        type: integer
+      description:
+        type: string
+      name:
+        type: string
+      privileges:
+        items:
+          additionalProperties: true
+          type: object
+        type: array
+      updatedAt:
+        type: integer
+      userCount:
+        type: integer
+    type: object
+  model.User:
+    properties:
+      _id:
+        type: string
+      createdAt:
+        type: integer
+      email:
+        type: string
+      fullname:
+        type: string
+      password:
+        type: string
+      roleId:
+        type: string
+      status:
+        type: string
+      updatedAt:
+        type: integer
+      username:
+        type: string
+    type: object
+  model.User_Login:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  model.User_Profil:
+    properties:
+      _id:
+        type: string
+      createdAt:
+        type: integer
+      email:
+        type: string
+      fullname:
+        type: string
+      updatedAt:
+        type: integer
+      username:
+        type: string
+    type: object
+  model.User_ResetPassword:
+    properties:
+      confirmpassword:
+        type: string
+      id:
+        type: string
+      newPassword:
+        type: string
+      oldPassword:
+        type: string
+    type: object
+  model.User_ResetPassword_Admin:
+    properties:
+      NewPassword:
+        type: string
+      confirmpassword:
+        type: string
+      id:
+        type: string
+    type: object
+  model.User_Search:
+    properties:
+      filter:
+        items:
+          additionalProperties: true
+          type: object
+        type: array
+      fullname:
+        type: string
+      order:
+        example: DESC
+        type: string
+      orderBy:
+        example: createdAt
+        type: string
+      page:
+        example: 1
+        type: integer
+      range:
+        $ref: '#/definitions/model.Range'
+      search:
+        description: '? Regex'
+        type: string
+      searchBy:
+        items:
+          type: string
+        type: array
+      size:
+        example: 11
+        type: integer
+    type: object
+  model.User_View:
+    properties:
+      _id:
+        type: string
+      createdAt:
+        type: integer
+      email:
+        type: string
+      fullname:
+        type: string
+      password:
+        type: string
+      role:
+        $ref: '#/definitions/model.Role'
+      roleId:
+        type: string
+      status:
+        type: string
+      updatedAt:
+        type: integer
+      username:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /auth/change-password:
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: PARAM
+        in: body
+        name: parameter
+        required: true
+        schema:
+          $ref: '#/definitions/model.User_ResetPassword'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            properties:
+              meta_data:
+                $ref: '#/definitions/model.MetadataResponse'
+            type: object
+      security:
+      - JWT: []
+      tags:
+      - auth
+  /auth/update-profile:
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: PARAM
+        in: body
+        name: parameter
+        required: true
+        schema:
+          $ref: '#/definitions/model.User_Profil'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            properties:
+              meta_data:
+                $ref: '#/definitions/model.MetadataResponse'
+            type: object
+      security:
+      - JWT: []
+      tags:
+      - auth
+  /dataSet/add:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: PARAM
+        in: body
+        name: parameter
+        required: true
+        schema:
+          $ref: '#/definitions/model.DataSet'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: OK
+          schema:
+            properties:
+              meta_data:
+                $ref: '#/definitions/model.MetadataResponse'
+            type: object
+      security:
+      - JWT: []
+      tags:
+      - dataSet
+  /dataSet/delete:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: ID
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            properties:
+              meta_data:
+                $ref: '#/definitions/model.MetadataResponse'
+            type: object
+      security:
+      - JWT: []
+      tags:
+      - dataSet
+  /dataSet/get-all:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: PARAM
+        in: body
+        name: parameter
+        required: true
+        schema:
+          $ref: '#/definitions/model.DataSet_Search'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            properties:
+              data:
+                items:
+                  $ref: '#/definitions/model.DataSet_View'
+                type: array
+              meta_data:
+                $ref: '#/definitions/model.MetadataResponse'
+            type: object
+      security:
+      - JWT: []
+      tags:
+      - dataSet
+  /dataSet/get-one:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: ID
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            properties:
+              data:
+                $ref: '#/definitions/model.DataSet_View'
+              meta_data:
+                $ref: '#/definitions/model.MetadataResponse'
+            type: object
+      security:
+      - JWT: []
+      tags:
+      - dataSet
+  /dataSet/update:
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: PARAM
+        in: body
+        name: parameter
+        required: true
+        schema:
+          $ref: '#/definitions/model.DataSet'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            properties:
+              meta_data:
+                $ref: '#/definitions/model.MetadataResponse'
+            type: object
+      security:
+      - JWT: []
+      tags:
+      - dataSet
+  /public/auth/login:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: PARAM
+        in: body
+        name: parameter
+        required: true
+        schema:
+          $ref: '#/definitions/model.User_Login'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            properties:
+              meta_data:
+                $ref: '#/definitions/model.MetadataResponse'
+            type: object
+      tags:
+      - public
+  /public/auth/refresh:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            properties:
+              meta_data:
+                $ref: '#/definitions/model.MetadataResponse'
+            type: object
+      security:
+      - JWT: []
+      tags:
+      - public
+  /public/auth/refresh2:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            properties:
+              meta_data:
+                $ref: '#/definitions/model.MetadataResponse'
+            type: object
+      security:
+      - JWT: []
+      tags:
+      - public
+  /public/user/register:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: PARAM
+        in: body
+        name: parameter
+        required: true
+        schema:
+          $ref: '#/definitions/model.User'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: OK
+          schema:
+            properties:
+              meta_data:
+                $ref: '#/definitions/model.MetadataResponse'
+            type: object
+      tags:
+      - public
+  /public/user/reset-password:
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: PARAM
+        in: body
+        name: parameter
+        required: true
+        schema:
+          $ref: '#/definitions/model.User_ResetPassword'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            properties:
+              meta_data:
+                $ref: '#/definitions/model.MetadataResponse'
+            type: object
+      tags:
+      - public
+  /role/add:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: PARAM
+        in: body
+        name: parameter
+        required: true
+        schema:
+          $ref: '#/definitions/model.Role'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: OK
+          schema:
+            properties:
+              meta_data:
+                $ref: '#/definitions/model.MetadataResponse'
+            type: object
+      security:
+      - JWT: []
+      tags:
+      - role
+  /role/delete:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: ID
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            properties:
+              meta_data:
+                $ref: '#/definitions/model.MetadataResponse'
+            type: object
+      security:
+      - JWT: []
+      tags:
+      - role
+  /role/get-all:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: PARAM
+        in: body
+        name: parameter
+        required: true
+        schema:
+          $ref: '#/definitions/model.Role_Search'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            properties:
+              data:
+                items:
+                  $ref: '#/definitions/model.Role_View'
+                type: array
+              meta_data:
+                $ref: '#/definitions/model.MetadataResponse'
+            type: object
+      security:
+      - JWT: []
+      tags:
+      - role
+  /role/get-one:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: ID
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            properties:
+              data:
+                $ref: '#/definitions/model.Role_View'
+              meta_data:
+                $ref: '#/definitions/model.MetadataResponse'
+            type: object
+      security:
+      - JWT: []
+      tags:
+      - role
+  /role/update:
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: PARAM
+        in: body
+        name: parameter
+        required: true
+        schema:
+          $ref: '#/definitions/model.Role'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            properties:
+              meta_data:
+                $ref: '#/definitions/model.MetadataResponse'
+            type: object
+      security:
+      - JWT: []
+      tags:
+      - role
+  /user/add:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: PARAM
+        in: body
+        name: parameter
+        required: true
+        schema:
+          $ref: '#/definitions/model.User'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: OK
+          schema:
+            properties:
+              meta_data:
+                $ref: '#/definitions/model.MetadataResponse'
+            type: object
+      security:
+      - JWT: []
+      tags:
+      - user
+  /user/delete:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: ID
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            properties:
+              meta_data:
+                $ref: '#/definitions/model.MetadataResponse'
+            type: object
+      security:
+      - JWT: []
+      tags:
+      - user
+  /user/get-all:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: PARAM
+        in: body
+        name: parameter
+        required: true
+        schema:
+          $ref: '#/definitions/model.User_Search'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            properties:
+              data:
+                items:
+                  $ref: '#/definitions/model.User_View'
+                type: array
+              meta_data:
+                $ref: '#/definitions/model.MetadataResponse'
+            type: object
+      security:
+      - JWT: []
+      tags:
+      - user
+  /user/get-one:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: ID
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            properties:
+              data:
+                $ref: '#/definitions/model.User_View'
+              meta_data:
+                $ref: '#/definitions/model.MetadataResponse'
+            type: object
+      security:
+      - JWT: []
+      tags:
+      - user
+  /user/reset-password:
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: PARAM
+        in: body
+        name: parameter
+        required: true
+        schema:
+          $ref: '#/definitions/model.User_ResetPassword_Admin'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            properties:
+              meta_data:
+                $ref: '#/definitions/model.MetadataResponse'
+            type: object
+      security:
+      - JWT: []
+      tags:
+      - user
+  /user/update:
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: PARAM
+        in: body
+        name: parameter
+        required: true
+        schema:
+          $ref: '#/definitions/model.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            properties:
+              meta_data:
+                $ref: '#/definitions/model.MetadataResponse'
+            type: object
+      security:
+      - JWT: []
+      tags:
+      - user
+securityDefinitions:
+  JWT:
+    description: E.g. Bearer Your.Token
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
