@@ -1,13 +1,34 @@
-FROM golang:1.18.2-alpine3.15 as build
+# Stage 1: Build
+FROM golang:1.21-alpine AS build
+
 RUN apk --no-cache add tzdata
 WORKDIR /app
-ADD source/. ./
-RUN ls /app
-RUN CGO_ENABLED=0 GOOS=linux go build -o app
 
-FROM scratch as finals
+# Copy semua source code ke dalam container
+COPY source/. ./
+
+# Build Go binary
+RUN CGO_ENABLED=0 GOOS=linux go build -o app main.go
+
+# Stage 2: Final Image
+FROM scratch AS finals
+
+WORKDIR /app
+
+# Copy timezone data
 COPY --from=build /usr/share/zoneinfo /usr/share/zoneinfo
-COPY --from=build /app/app .
+
+# Copy binary hasil build
+COPY --from=build /app/app /app/app
+
+# Copy file konfigurasi (pastikan `.env` ada di host sebelum build)
+COPY source/.env /app/.env
+
+# Set timezone
 ENV TZ=Asia/Jakarta
+
+# Expose port
 EXPOSE 8900
-CMD [ "/app" ]
+
+# Jalankan aplikasi
+CMD ["/app/app"]
