@@ -71,6 +71,7 @@ func main() {
 	controller.NewUserController(apiV1)
 	controller.NewRoleController(apiV1)
 	controller.NewDataSetController(apiV1)
+	controller.NewCatalogController(apiV1)
 
 	log.Println(aurora.Green(
 		fmt.Sprintf("http://localhost%s/swagger/index.html", appPort),

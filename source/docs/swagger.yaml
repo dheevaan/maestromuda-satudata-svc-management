@@ -1,4 +1,55 @@
 definitions:
+  model.Catalog:
+    properties:
+      _id:
+        type: string
+      category:
+        type: string
+      createdAt:
+        type: integer
+      name:
+        type: string
+      updatedAt:
+        type: integer
+    type: object
+  model.Catalog_Search:
+    properties:
+      filter:
+        items:
+          additionalProperties: true
+          type: object
+        type: array
+      order:
+        example: DESC
+        type: string
+      orderBy:
+        example: createdAt
+        type: string
+      page:
+        example: 1
+        type: integer
+      range:
+        $ref: '#/definitions/model.Range'
+      search:
+        description: '? Regex'
+        type: string
+      size:
+        example: 11
+        type: integer
+    type: object
+  model.Catalog_View:
+    properties:
+      _id:
+        type: string
+      category:
+        type: string
+      createdAt:
+        type: integer
+      name:
+        type: string
+      updatedAt:
+        type: integer
+    type: object
   model.DataSet:
     properties:
       _id:
@@ -22,19 +73,15 @@ definitions:
         type: string
       data_table:
         type: boolean
-      is_required_id:
-        type: boolean
-      is_required_province_code:
-        type: boolean
-      is_required_province_name:
-        type: boolean
       updatedAt:
         type: integer
       upload_file:
         type: boolean
       value_row:
-        additionalProperties: true
-        type: object
+        items:
+          additionalProperties: true
+          type: object
+        type: array
     type: object
   model.DataSet_Search:
     properties:
@@ -88,19 +135,15 @@ definitions:
         type: string
       data_table:
         type: boolean
-      is_required_id:
-        type: boolean
-      is_required_province_code:
-        type: boolean
-      is_required_province_name:
-        type: boolean
       updatedAt:
         type: integer
       upload_file:
         type: boolean
       value_row:
-        additionalProperties: true
-        type: object
+        items:
+          additionalProperties: true
+          type: object
+        type: array
     type: object
   model.MetadataResponse:
     properties:
@@ -371,6 +414,135 @@ paths:
       - JWT: []
       tags:
       - auth
+  /catalog/add:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: PARAM
+        in: body
+        name: parameter
+        required: true
+        schema:
+          $ref: '#/definitions/model.Catalog'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: OK
+          schema:
+            properties:
+              meta_data:
+                $ref: '#/definitions/model.MetadataResponse'
+            type: object
+      security:
+      - JWT: []
+      tags:
+      - catalog
+  /catalog/delete:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: ID
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            properties:
+              meta_data:
+                $ref: '#/definitions/model.MetadataResponse'
+            type: object
+      security:
+      - JWT: []
+      tags:
+      - catalog
+  /catalog/get-all:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: PARAM
+        in: body
+        name: parameter
+        required: true
+        schema:
+          $ref: '#/definitions/model.Catalog_Search'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            properties:
+              data:
+                items:
+                  $ref: '#/definitions/model.Catalog_View'
+                type: array
+              meta_data:
+                $ref: '#/definitions/model.MetadataResponse'
+            type: object
+      security:
+      - JWT: []
+      tags:
+      - catalog
+  /catalog/get-one:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: ID
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            properties:
+              data:
+                $ref: '#/definitions/model.Catalog_View'
+              meta_data:
+                $ref: '#/definitions/model.MetadataResponse'
+            type: object
+      security:
+      - JWT: []
+      tags:
+      - catalog
+  /catalog/update:
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: PARAM
+        in: body
+        name: parameter
+        required: true
+        schema:
+          $ref: '#/definitions/model.Catalog'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            properties:
+              meta_data:
+                $ref: '#/definitions/model.MetadataResponse'
+            type: object
+      security:
+      - JWT: []
+      tags:
+      - catalog
   /dataSet/add:
     post:
       consumes:

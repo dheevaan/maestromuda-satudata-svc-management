@@ -100,6 +100,221 @@ const docTemplate = `{
                 }
             }
         },
+        "/catalog/add": {
+            "post": {
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "catalog"
+                ],
+                "parameters": [
+                    {
+                        "description": "PARAM",
+                        "name": "parameter",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.Catalog"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "meta_data": {
+                                    "$ref": "#/definitions/model.MetadataResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/catalog/delete": {
+            "delete": {
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "catalog"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ID",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "meta_data": {
+                                    "$ref": "#/definitions/model.MetadataResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/catalog/get-all": {
+            "post": {
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "catalog"
+                ],
+                "parameters": [
+                    {
+                        "description": "PARAM",
+                        "name": "parameter",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.Catalog_Search"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/model.Catalog_View"
+                                    }
+                                },
+                                "meta_data": {
+                                    "$ref": "#/definitions/model.MetadataResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/catalog/get-one": {
+            "get": {
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "catalog"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ID",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "$ref": "#/definitions/model.Catalog_View"
+                                },
+                                "meta_data": {
+                                    "$ref": "#/definitions/model.MetadataResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/catalog/update": {
+            "put": {
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "catalog"
+                ],
+                "parameters": [
+                    {
+                        "description": "PARAM",
+                        "name": "parameter",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.Catalog"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "meta_data": {
+                                    "$ref": "#/definitions/model.MetadataResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/dataSet/add": {
             "post": {
                 "security": [
@@ -962,6 +1177,81 @@ const docTemplate = `{
         }
     },
     "definitions": {
+        "model.Catalog": {
+            "type": "object",
+            "properties": {
+                "_id": {
+                    "type": "string"
+                },
+                "category": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "integer"
+                }
+            }
+        },
+        "model.Catalog_Search": {
+            "type": "object",
+            "properties": {
+                "filter": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": true
+                    }
+                },
+                "order": {
+                    "type": "string",
+                    "example": "DESC"
+                },
+                "orderBy": {
+                    "type": "string",
+                    "example": "createdAt"
+                },
+                "page": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "range": {
+                    "$ref": "#/definitions/model.Range"
+                },
+                "search": {
+                    "description": "? Regex",
+                    "type": "string"
+                },
+                "size": {
+                    "type": "integer",
+                    "example": 11
+                }
+            }
+        },
+        "model.Catalog_View": {
+            "type": "object",
+            "properties": {
+                "_id": {
+                    "type": "string"
+                },
+                "category": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "integer"
+                }
+            }
+        },
         "model.DataSet": {
             "type": "object",
             "properties": {
@@ -996,15 +1286,6 @@ const docTemplate = `{
                 "data_table": {
                     "type": "boolean"
                 },
-                "is_required_id": {
-                    "type": "boolean"
-                },
-                "is_required_province_code": {
-                    "type": "boolean"
-                },
-                "is_required_province_name": {
-                    "type": "boolean"
-                },
                 "updatedAt": {
                     "type": "integer"
                 },
@@ -1012,8 +1293,11 @@ const docTemplate = `{
                     "type": "boolean"
                 },
                 "value_row": {
-                    "type": "object",
-                    "additionalProperties": true
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": true
+                    }
                 }
             }
         },
@@ -1092,15 +1376,6 @@ const docTemplate = `{
                 "data_table": {
                     "type": "boolean"
                 },
-                "is_required_id": {
-                    "type": "boolean"
-                },
-                "is_required_province_code": {
-                    "type": "boolean"
-                },
-                "is_required_province_name": {
-                    "type": "boolean"
-                },
                 "updatedAt": {
                     "type": "integer"
                 },
@@ -1108,8 +1383,11 @@ const docTemplate = `{
                     "type": "boolean"
                 },
                 "value_row": {
-                    "type": "object",
-                    "additionalProperties": true
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": true
+                    }
                 }
             }
         },

@@ -33,8 +33,6 @@ func NewDataSetService() *DataSetService {
 
 func (this *DataSetService) BaseGetAll(param model.DataSet_Search, collection *db.MongoDbUtil) (data []model.DataSet_View,
 	metadata model.MetadataResponse) {
-	var err error
-	var pipeline []bson.M
 	filter := bson.M{}
 	listFilterAnd := []bson.M{}
 	param.HandleFilter(&listFilterAnd)
@@ -42,11 +40,8 @@ func (this *DataSetService) BaseGetAll(param model.DataSet_Search, collection *d
 	if len(listFilterAnd) > 0 {
 		filter["$and"] = listFilterAnd
 	}
-
-	metadata.Pagination, err = collection.AggsPagination(pipeline, param.Request_Pagination, &data)
-	if err != nil {
-		metadata.Message = err.Error()
-	}
+	metadata.Pagination, metadata.Message = collection.Find(filter,
+		param.Request, &data)
 	return
 }
 

@@ -21,7 +21,7 @@ func InitJwt() (authMiddleware *jwt.GinJWTMiddleware, err error) {
 	authMiddleware, err = jwt.New(&jwt.GinJWTMiddleware{
 		Realm:       "Kuningan",
 		Key:         []byte(os.Getenv(config.ENV_KEY_JWT_SECRECT)),
-		Timeout:     5 * time.Minute,
+		Timeout:     24 * time.Minute,
 		MaxRefresh:  730 * time.Hour,
 		IdentityKey: identityKey,
 		PayloadFunc: func(data interface{}) jwt.MapClaims {
