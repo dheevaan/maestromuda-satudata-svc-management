@@ -9,6 +9,10 @@ definitions:
         type: string
       createdAt:
         type: integer
+      detail_progress:
+        items:
+          $ref: '#/definitions/model.DetailProgress'
+        type: array
       image_cover:
         type: string
       judul:
@@ -53,6 +57,10 @@ definitions:
         type: string
       createdAt:
         type: integer
+      detail_progress:
+        items:
+          $ref: '#/definitions/model.DetailProgress'
+        type: array
       image_cover:
         type: string
       judul:
@@ -215,6 +223,15 @@ definitions:
           additionalProperties: true
           type: object
         type: array
+    type: object
+  model.DetailProgress:
+    properties:
+      content:
+        type: string
+      image:
+        type: string
+      progress:
+        type: integer
     type: object
   model.MetadataResponse:
     properties:

@@ -10,11 +10,18 @@ import (
 type Blog struct {
 	MetadataWithID `bson:",inline"`
 
-	Author     string `json:"author" bson:"author"`
-	Judul      string `json:"judul" bson:"judul"`
-	ImageCover string `json:"image_cover" bson:"image_cover"`
-	Content    string `json:"content" bson:"content"`
+	Author         string           `json:"author" bson:"author"`
+	Judul          string           `json:"judul" bson:"judul"`
+	ImageCover     string           `json:"image_cover" bson:"image_cover"`
+	Content        string           `json:"content" bson:"content"`
+	Progress       int              `json:"progress" bson:"progress"`
+	DetailProgress []DetailProgress `json:"detail_progress" bson:"detail_progress"`
+}
+
+type DetailProgress struct {
 	Progress   int    `json:"progress" bson:"progress"`
+	ImageCover string `json:"image" bson:"image"`
+	Content    string `json:"content" bson:"content"`
 }
 
 type Blog_Search struct {

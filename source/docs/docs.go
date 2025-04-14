@@ -1455,6 +1455,12 @@ const docTemplate = `{
                 "createdAt": {
                     "type": "integer"
                 },
+                "detail_progress": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/model.DetailProgress"
+                    }
+                },
                 "image_cover": {
                     "type": "string"
                 },
@@ -1518,6 +1524,12 @@ const docTemplate = `{
                 },
                 "createdAt": {
                     "type": "integer"
+                },
+                "detail_progress": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/model.DetailProgress"
+                    }
                 },
                 "image_cover": {
                     "type": "string"
@@ -1756,6 +1768,20 @@ const docTemplate = `{
                         "type": "object",
                         "additionalProperties": true
                     }
+                }
+            }
+        },
+        "model.DetailProgress": {
+            "type": "object",
+            "properties": {
+                "content": {
+                    "type": "string"
+                },
+                "image": {
+                    "type": "string"
+                },
+                "progress": {
+                    "type": "integer"
                 }
             }
         },
