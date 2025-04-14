@@ -1461,6 +1461,9 @@ const docTemplate = `{
                 "judul": {
                     "type": "string"
                 },
+                "progress": {
+                    "type": "integer"
+                },
                 "updatedAt": {
                     "type": "integer"
                 }
@@ -1521,6 +1524,9 @@ const docTemplate = `{
                 },
                 "judul": {
                     "type": "string"
+                },
+                "progress": {
+                    "type": "integer"
                 },
                 "updatedAt": {
                     "type": "integer"

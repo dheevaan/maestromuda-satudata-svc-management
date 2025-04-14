@@ -14,6 +14,7 @@ type Blog struct {
 	Judul      string `json:"judul" bson:"judul"`
 	ImageCover string `json:"image_cover" bson:"image_cover"`
 	Content    string `json:"content" bson:"content"`
+	Progress   int    `json:"progress" bson:"progress"`
 }
 
 type Blog_Search struct {

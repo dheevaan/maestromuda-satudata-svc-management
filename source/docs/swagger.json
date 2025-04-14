@@ -1449,6 +1449,9 @@
                 "judul": {
                     "type": "string"
                 },
+                "progress": {
+                    "type": "integer"
+                },
                 "updatedAt": {
                     "type": "integer"
                 }
@@ -1509,6 +1512,9 @@
                 },
                 "judul": {
                     "type": "string"
+                },
+                "progress": {
+                    "type": "integer"
                 },
                 "updatedAt": {
                     "type": "integer"
