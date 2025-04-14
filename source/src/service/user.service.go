@@ -202,6 +202,7 @@ func (this *UserService) DeleteOne(key, value string) (errMessage string) {
 }
 
 func (this *UserService) GetUserWithValidatePassword(key, value, passwordToTest string, ptrUser *model.User) (resp model.Response, ok bool) {
+	this.ChangeCollectionName("v_user")
 	if err := this.dbUtil.BaseFindOne(bson.M{key: value, "status": bson.M{"$ne": "archive"}}, &ptrUser); err != nil {
 		log.Println(err)
 		resp.Metadata.Message = "Data not found"
@@ -228,6 +229,7 @@ func (this *UserService) GetUserWithValidatePassword(key, value, passwordToTest 
 }
 
 func (this *UserService) ResetPassword(param model.User_ResetPassword) (resp model.Response) {
+	this.ChangeCollectionName("user")
 	findRes := model.User{}
 	resp, ok := this.GetUserWithValidatePassword("_id", param.ID, param.OldPassword, &findRes)
 	if !ok {

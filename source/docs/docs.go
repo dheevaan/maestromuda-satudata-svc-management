@@ -100,6 +100,221 @@ const docTemplate = `{
                 }
             }
         },
+        "/blog/add": {
+            "post": {
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "blog"
+                ],
+                "parameters": [
+                    {
+                        "description": "PARAM",
+                        "name": "parameter",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.Blog"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "meta_data": {
+                                    "$ref": "#/definitions/model.MetadataResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/blog/delete": {
+            "delete": {
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "blog"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ID",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "meta_data": {
+                                    "$ref": "#/definitions/model.MetadataResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/blog/get-all": {
+            "post": {
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "blog"
+                ],
+                "parameters": [
+                    {
+                        "description": "PARAM",
+                        "name": "parameter",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.Blog_Search"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/model.Blog_View"
+                                    }
+                                },
+                                "meta_data": {
+                                    "$ref": "#/definitions/model.MetadataResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/blog/get-one": {
+            "get": {
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "blog"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ID",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "$ref": "#/definitions/model.Blog_View"
+                                },
+                                "meta_data": {
+                                    "$ref": "#/definitions/model.MetadataResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/blog/update": {
+            "put": {
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "blog"
+                ],
+                "parameters": [
+                    {
+                        "description": "PARAM",
+                        "name": "parameter",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.Blog"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "meta_data": {
+                                    "$ref": "#/definitions/model.MetadataResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/catalog/add": {
             "post": {
                 "security": [
@@ -219,6 +434,54 @@ const docTemplate = `{
                                     "type": "array",
                                     "items": {
                                         "$ref": "#/definitions/model.Catalog_View"
+                                    }
+                                },
+                                "meta_data": {
+                                    "$ref": "#/definitions/model.MetadataResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/catalog/get-all-source": {
+            "post": {
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "catalog"
+                ],
+                "parameters": [
+                    {
+                        "description": "PARAM",
+                        "name": "parameter",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.Catalog_Search"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
                                     }
                                 },
                                 "meta_data": {
@@ -1177,6 +1440,93 @@ const docTemplate = `{
         }
     },
     "definitions": {
+        "model.Blog": {
+            "type": "object",
+            "properties": {
+                "_id": {
+                    "type": "string"
+                },
+                "author": {
+                    "type": "string"
+                },
+                "content": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "integer"
+                },
+                "image_cover": {
+                    "type": "string"
+                },
+                "judul": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "integer"
+                }
+            }
+        },
+        "model.Blog_Search": {
+            "type": "object",
+            "properties": {
+                "filter": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": true
+                    }
+                },
+                "order": {
+                    "type": "string",
+                    "example": "DESC"
+                },
+                "orderBy": {
+                    "type": "string",
+                    "example": "createdAt"
+                },
+                "page": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "range": {
+                    "$ref": "#/definitions/model.Range"
+                },
+                "search": {
+                    "description": "? Regex",
+                    "type": "string"
+                },
+                "size": {
+                    "type": "integer",
+                    "example": 11
+                }
+            }
+        },
+        "model.Blog_View": {
+            "type": "object",
+            "properties": {
+                "_id": {
+                    "type": "string"
+                },
+                "author": {
+                    "type": "string"
+                },
+                "content": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "integer"
+                },
+                "image_cover": {
+                    "type": "string"
+                },
+                "judul": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "integer"
+                }
+            }
+        },
         "model.Catalog": {
             "type": "object",
             "properties": {
@@ -1188,6 +1538,9 @@ const docTemplate = `{
                 },
                 "createdAt": {
                     "type": "integer"
+                },
+                "image": {
+                    "type": "string"
                 },
                 "name": {
                     "type": "string"
@@ -1244,6 +1597,9 @@ const docTemplate = `{
                 "createdAt": {
                     "type": "integer"
                 },
+                "image": {
+                    "type": "string"
+                },
                 "name": {
                     "type": "string"
                 },
@@ -1270,6 +1626,9 @@ const docTemplate = `{
                         "type": "object",
                         "additionalProperties": true
                     }
+                },
+                "count_access": {
+                    "type": "integer"
                 },
                 "createdAt": {
                     "type": "integer"
@@ -1360,6 +1719,9 @@ const docTemplate = `{
                         "type": "object",
                         "additionalProperties": true
                     }
+                },
+                "count_access": {
+                    "type": "integer"
                 },
                 "createdAt": {
                     "type": "integer"
@@ -1555,6 +1917,13 @@ const docTemplate = `{
                 "password": {
                     "type": "string"
                 },
+                "privileges": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": true
+                    }
+                },
                 "roleId": {
                     "type": "string"
                 },
@@ -1695,6 +2064,13 @@ const docTemplate = `{
                 },
                 "password": {
                     "type": "string"
+                },
+                "privileges": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": true
+                    }
                 },
                 "role": {
                     "$ref": "#/definitions/model.Role"

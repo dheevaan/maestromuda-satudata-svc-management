@@ -71,6 +71,9 @@ func (this *DataSetService) GetOne(key, value string) (res model.DataSet_View, r
 		return res, SECRET + resEn, errMessage
 	} else {
 		this.dbUtil.FindOne(key, value, &res)
+		res.CountAccess = res.CountAccess+1
+		_, upsertId := this.dbUtil.UpsertAndGetId(true, &res)
+		log.Println(upsertId)
 		return
 	}
 	// return

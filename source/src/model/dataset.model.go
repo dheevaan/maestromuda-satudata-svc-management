@@ -11,6 +11,7 @@ type DataSet struct {
 	MetadataWithID `bson:",inline"`
 	DataInfo       `bson:",inline"`
 	DataConfig     `bson:",inline"`
+	CountAccess    int `json:"count_access" bson:"count_access"`
 }
 
 type DataInfo struct {

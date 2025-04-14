@@ -13,17 +13,17 @@ import (
 )
 
 //* Change this service content with ALT+C(Case sensitive) then CTRL+D this:
-//? catalog and Catalog
+//? blog and Blog
 
-type CatalogService struct {
+type BlogService struct {
 	collectionName string
 	ctx            context.Context
 	dbUtil         *db.MongoDbUtil
 }
 
-func NewCatalogService() *CatalogService {
-	this := &CatalogService{
-		collectionName: "catalog",
+func NewBlogService() *BlogService {
+	this := &BlogService{
+		collectionName: "blog",
 		ctx:            context.Background(),
 	}
 	this.dbUtil = db.NewMongoDbUtilUseEnv(this.collectionName)
@@ -31,7 +31,7 @@ func NewCatalogService() *CatalogService {
 	return this
 }
 
-func (this *CatalogService) BaseGetAll(param model.Catalog_Search, collection *db.MongoDbUtil) (data []model.Catalog_View,
+func (this *BlogService) BaseGetAll(param model.Blog_Search, collection *db.MongoDbUtil) (data []model.Blog_View,
 	metadata model.MetadataResponse) {
 	filter := bson.M{}
 	listFilterAnd := []bson.M{}
@@ -45,7 +45,7 @@ func (this *CatalogService) BaseGetAll(param model.Catalog_Search, collection *d
 	return
 }
 
-func (this *CatalogService) BaseGetAllMap(param model.Catalog_Search, collection *db.MongoDbUtil) (data []map[string]interface{}, metadata model.MetadataResponse) {
+func (this *BlogService) BaseGetAllMap(param model.Blog_Search, collection *db.MongoDbUtil) (data []map[string]interface{}, metadata model.MetadataResponse) {
 	filter := bson.M{}
 	listFilterAnd := []bson.M{}
 	param.HandleFilter(&listFilterAnd)
@@ -58,11 +58,11 @@ func (this *CatalogService) BaseGetAllMap(param model.Catalog_Search, collection
 	return
 }
 
-func (this *CatalogService) ChangeCollectionName(collName string) {
+func (this *BlogService) ChangeCollectionName(collName string) {
 	this.dbUtil = db.NewMongoDbUtilUseEnv(collName)
 }
 
-func (this *CatalogService) GetAll(param model.Catalog_Search) (data []model.Catalog_View, resEn string, metadata model.MetadataResponse) {
+func (this *BlogService) GetAll(param model.Blog_Search) (data []model.Blog_View, resEn string, metadata model.MetadataResponse) {
 	if os.Getenv("PROD_MODE") == "true" {
 		SECRET := secret.GenerateRandomString(7)
 		log.Println("SECRET", SECRET)
@@ -77,7 +77,7 @@ func (this *CatalogService) GetAll(param model.Catalog_Search) (data []model.Cat
 	// return this.BaseGetAll(param, this.dbUtil)
 }
 
-func (this *CatalogService) GetOne(key, value string, collectionName string) (res model.Catalog_View, resEn string, errMessage string) {
+func (this *BlogService) GetOne(key, value string, collectionName string) (res model.Blog_View, resEn string, errMessage string) {
 	// this.dbUtil.FindOne(key, value, &res)
 	if os.Getenv("PROD_MODE") == "true" {
 		SECRET := secret.GenerateRandomString(7)
@@ -93,7 +93,7 @@ func (this *CatalogService) GetOne(key, value string, collectionName string) (re
 	// return
 }
 
-func (this *CatalogService) Upsert(param model.Catalog, isUpdate bool) (resp model.Response) {
+func (this *BlogService) Upsert(param model.Blog, isUpdate bool) (resp model.Response) {
 	upsertErr, upsertId := this.dbUtil.UpsertAndGetId(isUpdate, &param)
 	resp.Metadata.Message = upsertErr
 	resp.Data = model.Response_Data_Upsert{
@@ -103,12 +103,12 @@ func (this *CatalogService) Upsert(param model.Catalog, isUpdate bool) (resp mod
 	return
 }
 
-func (this *CatalogService) DeleteOne(key, value string) (errMessage string) {
+func (this *BlogService) DeleteOne(key, value string) (errMessage string) {
 	errMessage = this.dbUtil.DeleteOne(key, value)
 	return
 }
 
-func (this *CatalogService) GetAllSource(param model.Catalog_Search) (data []map[string]interface{}, resEn string, metadata model.MetadataResponse) {
+func (this *BlogService) GetAllSource(param model.Blog_Search) (data []map[string]interface{}, resEn string, metadata model.MetadataResponse) {
 	this.ChangeCollectionName("source")
 	if os.Getenv("PROD_MODE") == "true" {
 		SECRET := secret.GenerateRandomString(7)
@@ -123,7 +123,7 @@ func (this *CatalogService) GetAllSource(param model.Catalog_Search) (data []map
 	}
 }
 
-func (this *CatalogService) GetOneCatalog(key, value string, collectionName string) (res model.Catalog_View, resEn string, errMessage string) {
+func (this *BlogService) GetOneBlog(key, value string, collectionName string) (res model.Blog_View, resEn string, errMessage string) {
 	// this.dbUtil.FindOne(key, value, &res)
 	if os.Getenv("PROD_MODE") == "true" {
 		SECRET := secret.GenerateRandomString(7)

@@ -24,6 +24,7 @@ func NewCatalogController(router *gin.RouterGroup) *CatalogController {
 
 	catalog := this.router.Group("/catalog")
 	catalog.POST("/get-all", this.GetAll)
+	catalog.POST("/get-all-source", this.GetAllSource)
 	catalog.GET("/get-one", this.GetOne)
 	catalog.POST("/add", this.Add)
 	catalog.PUT("/update", this.Update)
@@ -53,6 +54,31 @@ func (this *CatalogController) GetAll(ctx *gin.Context) {
 		_, resp.Data, resp.Metadata = this.service.GetAll(param)
 	} else {
 		resp.Data, _, resp.Metadata = this.service.GetAll(param)
+	}
+	// resp.Data, resp.Metadata = this.service.GetAll(param)
+}
+
+// @Tags catalog
+// @Accept json
+// @Param parameter body model.Catalog_Search true "PARAM"
+// @Produce json
+// @Success 200 {object} object{data=[]object{},meta_data=model.MetadataResponse} "OK"
+// @Router /catalog/get-all-source [post]
+// @Security JWT
+func (this *CatalogController) GetAllSource(ctx *gin.Context) {
+	resp := model.Response{}
+	defer SetMetadataResponse(ctx, time.Now(), &resp)
+
+	var param model.Catalog_Search
+	if err := ctx.BindJSON(&param); err != nil {
+		log.Println(err)
+		return
+	}
+
+	if os.Getenv("PROD_MODE") == "true" {
+		_, resp.Data, resp.Metadata = this.service.GetAllSource(param)
+	} else {
+		resp.Data, _, resp.Metadata = this.service.GetAllSource(param)
 	}
 	// resp.Data, resp.Metadata = this.service.GetAll(param)
 }

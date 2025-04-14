@@ -18,6 +18,7 @@ type User struct {
 	Username string `json:"username,omitempty" bson:"username,omitempty"`
 	Fullname string `json:"fullname,omitempty" bson:"fullname,omitempty"`
 	Status   string `json:"status,omitempty" bson:"status,omitempty"`
+	Privileges []map[string]interface{} `json:"privileges" bson:"privileges,omitempty"`
 }
 
 type User_Profil struct {
@@ -28,8 +29,9 @@ type User_Profil struct {
 }
 
 type User_View struct {
-	User `bson:",inline"`
-	Role `json:"role" bson:"role,omitempty"`
+	User       `bson:",inline"`
+	Role       `json:"role" bson:"role,omitempty"`
+	Privileges []map[string]interface{} `json:"privileges" bson:"privileges,omitempty"`
 }
 
 type User_Search struct {

@@ -1,4 +1,63 @@
 definitions:
+  model.Blog:
+    properties:
+      _id:
+        type: string
+      author:
+        type: string
+      content:
+        type: string
+      createdAt:
+        type: integer
+      image_cover:
+        type: string
+      judul:
+        type: string
+      updatedAt:
+        type: integer
+    type: object
+  model.Blog_Search:
+    properties:
+      filter:
+        items:
+          additionalProperties: true
+          type: object
+        type: array
+      order:
+        example: DESC
+        type: string
+      orderBy:
+        example: createdAt
+        type: string
+      page:
+        example: 1
+        type: integer
+      range:
+        $ref: '#/definitions/model.Range'
+      search:
+        description: '? Regex'
+        type: string
+      size:
+        example: 11
+        type: integer
+    type: object
+  model.Blog_View:
+    properties:
+      _id:
+        type: string
+      author:
+        type: string
+      content:
+        type: string
+      createdAt:
+        type: integer
+      image_cover:
+        type: string
+      judul:
+        type: string
+      updatedAt:
+        type: integer
+    type: object
   model.Catalog:
     properties:
       _id:
@@ -7,6 +66,8 @@ definitions:
         type: string
       createdAt:
         type: integer
+      image:
+        type: string
       name:
         type: string
       updatedAt:
@@ -45,6 +106,8 @@ definitions:
         type: string
       createdAt:
         type: integer
+      image:
+        type: string
       name:
         type: string
       updatedAt:
@@ -63,6 +126,8 @@ definitions:
           additionalProperties: true
           type: object
         type: array
+      count_access:
+        type: integer
       createdAt:
         type: integer
       data_description:
@@ -125,6 +190,8 @@ definitions:
           additionalProperties: true
           type: object
         type: array
+      count_access:
+        type: integer
       createdAt:
         type: integer
       data_description:
@@ -256,6 +323,11 @@ definitions:
         type: string
       password:
         type: string
+      privileges:
+        items:
+          additionalProperties: true
+          type: object
+        type: array
       roleId:
         type: string
       status:
@@ -350,6 +422,11 @@ definitions:
         type: string
       password:
         type: string
+      privileges:
+        items:
+          additionalProperties: true
+          type: object
+        type: array
       role:
         $ref: '#/definitions/model.Role'
       roleId:
@@ -414,6 +491,135 @@ paths:
       - JWT: []
       tags:
       - auth
+  /blog/add:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: PARAM
+        in: body
+        name: parameter
+        required: true
+        schema:
+          $ref: '#/definitions/model.Blog'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: OK
+          schema:
+            properties:
+              meta_data:
+                $ref: '#/definitions/model.MetadataResponse'
+            type: object
+      security:
+      - JWT: []
+      tags:
+      - blog
+  /blog/delete:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: ID
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            properties:
+              meta_data:
+                $ref: '#/definitions/model.MetadataResponse'
+            type: object
+      security:
+      - JWT: []
+      tags:
+      - blog
+  /blog/get-all:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: PARAM
+        in: body
+        name: parameter
+        required: true
+        schema:
+          $ref: '#/definitions/model.Blog_Search'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            properties:
+              data:
+                items:
+                  $ref: '#/definitions/model.Blog_View'
+                type: array
+              meta_data:
+                $ref: '#/definitions/model.MetadataResponse'
+            type: object
+      security:
+      - JWT: []
+      tags:
+      - blog
+  /blog/get-one:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: ID
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            properties:
+              data:
+                $ref: '#/definitions/model.Blog_View'
+              meta_data:
+                $ref: '#/definitions/model.MetadataResponse'
+            type: object
+      security:
+      - JWT: []
+      tags:
+      - blog
+  /blog/update:
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: PARAM
+        in: body
+        name: parameter
+        required: true
+        schema:
+          $ref: '#/definitions/model.Blog'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            properties:
+              meta_data:
+                $ref: '#/definitions/model.MetadataResponse'
+            type: object
+      security:
+      - JWT: []
+      tags:
+      - blog
   /catalog/add:
     post:
       consumes:
@@ -484,6 +690,35 @@ paths:
               data:
                 items:
                   $ref: '#/definitions/model.Catalog_View'
+                type: array
+              meta_data:
+                $ref: '#/definitions/model.MetadataResponse'
+            type: object
+      security:
+      - JWT: []
+      tags:
+      - catalog
+  /catalog/get-all-source:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: PARAM
+        in: body
+        name: parameter
+        required: true
+        schema:
+          $ref: '#/definitions/model.Catalog_Search'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            properties:
+              data:
+                items:
+                  type: object
                 type: array
               meta_data:
                 $ref: '#/definitions/model.MetadataResponse'
