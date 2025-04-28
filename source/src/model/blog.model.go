@@ -14,14 +14,24 @@ type Blog struct {
 	Judul          string           `json:"judul" bson:"judul"`
 	ImageCover     string           `json:"image_cover" bson:"image_cover"`
 	Content        string           `json:"content" bson:"content"`
-	Progress       int              `json:"progress" bson:"progress"`
 	DetailProgress []DetailProgress `json:"detail_progress" bson:"detail_progress"`
 }
 
 type DetailProgress struct {
-	Progress   int    `json:"progress" bson:"progress"`
-	ImageCover string `json:"image" bson:"image"`
-	Content    string `json:"content" bson:"content"`
+	ProramName    string          `json:"program_name" bson:"program_name"`
+	ImageCover    string          `json:"image" bson:"image"`
+	Description   string          `json:"description" bson:"description"`
+	Target        string          `json:"target" bson:"target"`
+	Progress      int             `json:"progress" bson:"progress"`
+	DetailProgram []DetailProgram `json:"detail_program" bson:"detail_program"`
+}
+
+type DetailProgram struct {
+	ProgramName        string `json:"program_name" bson:"program_name"`
+	Location           string `json:"location" bson:"location"`
+	SupportingEvidence string `json:"supporting_evidence" bson:"supporting_evidence"`
+	Output             string `json:"output" bson:"output"`
+	Progress           int    `json:"progress" bson:"progress"`
 }
 
 type Blog_Search struct {

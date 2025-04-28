@@ -1467,9 +1467,6 @@ const docTemplate = `{
                 "judul": {
                     "type": "string"
                 },
-                "progress": {
-                    "type": "integer"
-                },
                 "updatedAt": {
                     "type": "integer"
                 }
@@ -1536,9 +1533,6 @@ const docTemplate = `{
                 },
                 "judul": {
                     "type": "string"
-                },
-                "progress": {
-                    "type": "integer"
                 },
                 "updatedAt": {
                     "type": "integer"
@@ -1771,17 +1765,49 @@ const docTemplate = `{
                 }
             }
         },
-        "model.DetailProgress": {
+        "model.DetailProgram": {
             "type": "object",
             "properties": {
-                "content": {
+                "location": {
                     "type": "string"
                 },
-                "image": {
+                "output": {
+                    "type": "string"
+                },
+                "program_name": {
                     "type": "string"
                 },
                 "progress": {
                     "type": "integer"
+                },
+                "supporting_evidence": {
+                    "type": "string"
+                }
+            }
+        },
+        "model.DetailProgress": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "detail_program": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/model.DetailProgram"
+                    }
+                },
+                "image": {
+                    "type": "string"
+                },
+                "program_name": {
+                    "type": "string"
+                },
+                "progress": {
+                    "type": "integer"
+                },
+                "target": {
+                    "type": "string"
                 }
             }
         },

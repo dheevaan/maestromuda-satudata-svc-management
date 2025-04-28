@@ -17,8 +17,6 @@ definitions:
         type: string
       judul:
         type: string
-      progress:
-        type: integer
       updatedAt:
         type: integer
     type: object
@@ -65,8 +63,6 @@ definitions:
         type: string
       judul:
         type: string
-      progress:
-        type: integer
       updatedAt:
         type: integer
     type: object
@@ -224,14 +220,35 @@ definitions:
           type: object
         type: array
     type: object
-  model.DetailProgress:
+  model.DetailProgram:
     properties:
-      content:
+      location:
         type: string
-      image:
+      output:
+        type: string
+      program_name:
         type: string
       progress:
         type: integer
+      supporting_evidence:
+        type: string
+    type: object
+  model.DetailProgress:
+    properties:
+      description:
+        type: string
+      detail_program:
+        items:
+          $ref: '#/definitions/model.DetailProgram'
+        type: array
+      image:
+        type: string
+      program_name:
+        type: string
+      progress:
+        type: integer
+      target:
+        type: string
     type: object
   model.MetadataResponse:
     properties:
