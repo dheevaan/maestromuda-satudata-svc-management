@@ -63,6 +63,7 @@ func (this *BlogService) ChangeCollectionName(collName string) {
 }
 
 func (this *BlogService) GetAll(param model.Blog_Search) (data []model.Blog_View, resEn string, metadata model.MetadataResponse) {
+	this.ChangeCollectionName("blog")
 	if os.Getenv("PROD_MODE") == "true" {
 		SECRET := secret.GenerateRandomString(7)
 		log.Println("SECRET", SECRET)
@@ -78,6 +79,7 @@ func (this *BlogService) GetAll(param model.Blog_Search) (data []model.Blog_View
 }
 
 func (this *BlogService) GetOne(key, value string, collectionName string) (res model.Blog_View, resEn string, errMessage string) {
+	this.ChangeCollectionName("blog")
 	// this.dbUtil.FindOne(key, value, &res)
 	if os.Getenv("PROD_MODE") == "true" {
 		SECRET := secret.GenerateRandomString(7)
@@ -94,6 +96,7 @@ func (this *BlogService) GetOne(key, value string, collectionName string) (res m
 }
 
 func (this *BlogService) Upsert(param model.Blog, isUpdate bool) (resp model.Response) {
+	this.ChangeCollectionName("blog")
 	upsertErr, upsertId := this.dbUtil.UpsertAndGetId(isUpdate, &param)
 	resp.Metadata.Message = upsertErr
 	resp.Data = model.Response_Data_Upsert{
@@ -104,6 +107,7 @@ func (this *BlogService) Upsert(param model.Blog, isUpdate bool) (resp model.Res
 }
 
 func (this *BlogService) DeleteOne(key, value string) (errMessage string) {
+	this.ChangeCollectionName("blog")
 	errMessage = this.dbUtil.DeleteOne(key, value)
 	return
 }
@@ -125,6 +129,7 @@ func (this *BlogService) GetAllSource(param model.Blog_Search) (data []map[strin
 
 func (this *BlogService) GetOneBlog(key, value string, collectionName string) (res model.Blog_View, resEn string, errMessage string) {
 	// this.dbUtil.FindOne(key, value, &res)
+	this.ChangeCollectionName("blog")
 	if os.Getenv("PROD_MODE") == "true" {
 		SECRET := secret.GenerateRandomString(7)
 		log.Println("SECRET", SECRET)
